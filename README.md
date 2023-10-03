@@ -1,6 +1,6 @@
 # Spatial ecology in R ♟️
 
-## Student 🧑‍🎓
+## Student 🧑‍🎓🥷
 Giovanni Ferrigato
 
 ## Main scripts in this repo 💻
