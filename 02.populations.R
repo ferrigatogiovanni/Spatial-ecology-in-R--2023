@@ -23,6 +23,12 @@ plot(bei, cex = 0.5, pch = 19)
 bei.extra
 plot(bei.extra)
 
+# let's use only a part of the dataset: elev ($ is linking elev with bei.extra)
+plot(bei.extra$elev)
+elevation <- bei.extra$elev   #creating an object called elevation
+plot(elevation)
+bei.extra
 
-
-
+# second method to select elements
+elevation2 <- bei.extra[[1]] #it's the same as we did before (bei.extra$elev)
+plot(elevation2)
