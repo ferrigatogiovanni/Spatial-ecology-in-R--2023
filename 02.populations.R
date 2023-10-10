@@ -36,9 +36,28 @@ plot(elevation2)
 # passing from points to a continuous surface
 densitymap <- density(bei) #now dealing with pixels
 plot(densitymap)
-points(bei, cex = .2) #how to add a plot to the current one without erasing the first one
-#how to change color to the plot 
+points(bei, cex = .2) #how to add a plot to the current one without erasing the firstòòòòòòòòòòòòòòòòççççç@@@@@@@
+
+# how to change color to the plot (package -> see viridis color maps on IT)
 c1 <- colorRampPalette(c("black", "red", "orange", "yellow"))(100)
 plot(densitymap, col = c1)
+c2 <- colorRampPalette(c("cornflowerblue","cyan","blue","darkorchid"))
+plot(densitymap, col = c2)  
 
+plot(bei.extra)
+elev <- bei.extra[[1]] # or you can use bei.extra$elev
+plot(elev) # you are plotting the elevation of the area 
 
+# multiframe 
+par(mfrow = c(1,2)) # we are putting two plots next to each other (1 row, 2 columns)
+plot(densitymap)
+plot(elev)
+
+par(mfrow = c(2,1)) # we are putting the second plot under the first one (2 row, 1 columns)
+plot(densitymap)
+plot(elev) 
+
+par(mfrow = c(1,3))
+plot(bei)
+plot(densitymap)
+plot(elev)  # we can observe that the higher elevation corresponds to the lower density
