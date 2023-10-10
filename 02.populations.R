@@ -7,7 +7,7 @@ install.packages("spatstat")
 # how to check if a code has been correctly installed
 library(spatstat)
 
-# let's use the bei data (dataset)
+# let's use the bei data (dataset) (trees in the tropical area forests)
 bei
 
 # plotting the data
@@ -32,3 +32,13 @@ bei.extra
 # second method to select elements
 elevation2 <- bei.extra[[1]] #it's the same as we did before (bei.extra$elev)
 plot(elevation2)
+
+# passing from points to a continuous surface
+densitymap <- density(bei) #now dealing with pixels
+plot(densitymap)
+points(bei, cex = .2) #how to add a plot to the current one without erasing the first one
+#how to change color to the plot 
+c1 <- colorRampPalette(c("black", "red", "orange", "yellow"))(100)
+plot(densitymap, col = c1)
+
+
