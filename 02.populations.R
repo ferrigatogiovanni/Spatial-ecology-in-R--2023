@@ -36,7 +36,7 @@ plot(elevation2)
 # passing from points to a continuous surface
 densitymap <- density(bei) #now dealing with pixels
 plot(densitymap)
-points(bei, cex = .2) #how to add a plot to the current one without erasing the firstòòòòòòòòòòòòòòòòççççç@@@@@@@
+points(bei, cex = .2) #how to add a plot to the current one without erasing the first
 
 # how to change color to the plot (package -> see viridis color maps on IT)
 c1 <- colorRampPalette(c("black", "red", "orange", "yellow"))(100)
