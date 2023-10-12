@@ -28,4 +28,14 @@ plot(abse)
 # selecting presences 
 plot(species[species$Occurrence == 1,],col='blue',pch=16) #selects the species that are present
 plot(species[species$Occurrence == 0,],col='red',pch=16) #selects the species that are absent
-par(frow <- c(1,2))
+
+# putting two plots near each others
+par(mfrow <- c(1,2))
+plot(pres)
+plot(abse)
+
+# it erases the previous plots/graphics
+dev.off()
+
+
+
