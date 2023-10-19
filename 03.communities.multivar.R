@@ -22,12 +22,12 @@ pldc2 = ldc2 * 100 / total
 pldc3 = ldc3 * 100 / total
 pldc4 = ldc4 * 100 / total
 
-pldc1 
-pldc2 
-
+pldc1; pldc2 
 pldc1 + pldc2 
 
 plot(ord)
 #see bromus hordeaceus (Bromhord in the plot)
 #on the other side: salix repens (Salirepe in the plot)
 #from the plot you can see the different plants (based on the position in the plot)
+
+
