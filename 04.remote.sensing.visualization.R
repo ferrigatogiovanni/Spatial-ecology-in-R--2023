@@ -10,5 +10,5 @@ library(imageRy)
 im.list() 
 
 #we are gonna use sentinel-2 --> https://sentinels.copernicus.eu/web/sentinel/missions/sentinel-2
-#importing the band 2 (see sentinel-2 bands --> https://en.wikipedia.org/wiki/Sentinel-2)
-b2 <- im.import("sentinel.dolomites.b2.tif")
+#importing the band 2, blue band (see sentinel-2 bands --> https://en.wikipedia.org/wiki/Sentinel-2)
+b2 <- im.import("sentinel.dolomites.b2.tif") #b2 is the blue wavelength
