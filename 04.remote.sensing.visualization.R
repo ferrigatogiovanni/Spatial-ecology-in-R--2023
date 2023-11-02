@@ -4,7 +4,7 @@
 library(devtools) #you need it in order to use install_github
 library(terra)
 
-#install_github --> https://www.rdocumentation.org/packages/devtools/versions/1.13.6/topics/install_github
+#install_github("ducciorocchini/imageRy") --> https://www.rdocumentation.org/packages/devtools/versions/1.13.6/topics/install_github
 library(imageRy)
 
 #now we will use the package, first we are gonna list the data
