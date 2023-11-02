@@ -48,3 +48,28 @@ plot(stacksent, col = cl)
 #plotting just the 4th element = b8
 plot(stacksent[[4]], col = cl)
 
+#plot in a multiframe the bands with different color ramps
+clblue <- colorRampPalette(c("dark blue","blue","light blue")) (100)
+plot(b2, col = clblue)
+
+clgreen <- colorRampPalette(c("dark green","green","light green")) (100)
+plot(b3, col = clgreen)
+
+clred <- colorRampPalette(c("dark red","red","pink")) (100)
+plot(b4, col = clred)
+
+clnir <- colorRampPalette(c("brown","orange","yellow")) (100)
+plot(b2, col = clnir)
+
+par(mfrow = c(2,2))
+plot(b2, col = clblue)
+plot(b3, col = clgreen)
+plot(b4, col = clred)
+plot(b8, col = clnir)
+
+#RGB space
+#stacksent: band2 blue element 1, stacksent[[1]]
+#band3 green element 2, stacksent[[2]]
+#band4 red element 3, stacksent[[3]]
+#band8 NIR element 4, stacksent[[4]]
+im.plotRGB <- (stacksent, r = 3, g = 2, b = 1) #assining the bands to the colors
