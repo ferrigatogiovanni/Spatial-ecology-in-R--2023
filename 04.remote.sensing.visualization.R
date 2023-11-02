@@ -11,15 +11,40 @@ library(imageRy)
 im.list() 
 
 #we are gonna use sentinel-2 --> https://sentinels.copernicus.eu/web/sentinel/missions/sentinel-2
+#download sentinel-2 data -> https://www.youtube.com/watch?v=KA2L4bDmo98
 #importing the band 2, blue band (see sentinel-2 bands --> https://en.wikipedia.org/wiki/Sentinel-2)
 b2 <- im.import("sentinel.dolomites.b2.tif") #b2 is the blue wavelength; we import the image with the function im.import()
-b2 #you can see the information about the image
+b2 #you can see the information about the image (WGS 84 / UTM zone 32N -> https://it.wikipedia.org/wiki/WGS84; Italy is is zones 32 and 33)
 #changing color to b2
-clblue <- colorRampPalette(c("dark grey","grey","light grey")) (100)
-plot(b2, col = clblue)
+cl <- colorRampPalette(c("black","grey","light grey")) (100) #the darkest parts are the one that absorb the blue, the lighter are 
+#the one that reflect the blue
+plot(b2, col = cl)
 
 #import the green band from Sentinel-2 (band 3)
-b3 <- im.import("sentinel.dolomites.b3.tif") #b2 is the green wavelength
-plot(b3, col = clblue)
+b3 <- im.import("sentinel.dolomites.b3.tif") #b3 is the green wavelength
+plot(b3, col = cl)
 
-#what is reflectance?
+#import the red band from Sentinel-2 (band 4)
+b4 <- im.import("sentinel.dolomites.b4.tif") #b4 is the red wavelength
+plot(b4, col = cl)
+
+#import the NIR band from Sentinel-2 (band 8) (NIR -> near infrared)
+b8 <- im.import("sentinel.dolomites.b8.tif") #b4 is the NIR wavelength
+plot(b8, col = cl)
+
+#multiframe; plotting the different band all together
+?par
+par(mfrow = c(2,2))
+plot(b2, col = cl)
+plot(b3, col = cl)
+plot(b4, col = cl)
+plot(b8, col = cl)
+
+#stack images (a simpler way to plot all the 4 bands)
+stacksent <- c(b2, b3, b4, b8)
+dev.off() #closing previous devices(in this case plots)
+plot(stacksent, col = cl)
+
+#plotting just the 4th element = b8
+plot(stacksent[[4]], col = cl)
+
