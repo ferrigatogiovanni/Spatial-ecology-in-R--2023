@@ -67,9 +67,25 @@ plot(b3, col = clgreen)
 plot(b4, col = clred)
 plot(b8, col = clnir)
 
-#RGB space
-#stacksent: band2 blue element 1, stacksent[[1]]
+#RGB space (see RGB colour model) (remember that stacksent <- c(b2, b3, b4, b8))
+#stacksent: 
+#band2 blue element 1, stacksent[[1]]
 #band3 green element 2, stacksent[[2]]
 #band4 red element 3, stacksent[[3]]
 #band8 NIR element 4, stacksent[[4]]
-im.plotRGB <- (stacksent, r = 3, g = 2, b = 1) #assining the bands to the colors
+im.plotRGB(stacksent, r = 3, g = 2, b = 1) #assining the bands to the colors 
+#(we can only assign 3 colours: band4, band3, band2 -> R, G, B)
+
+# we shift by one and use band8 and not band2 anymore (band8, band4, band3 -> R, G, B)
+im.plotRGB(stacksent, r = 4, g = 3, b = 2) #using infra-red on top of the red component
+
+#changing the position of the infra-red 
+im.plotRGB(stacksent, r = 3, g = 4, b = 2) #(band4, band8, band3 -> R, G, B); the infra-red enlight the green component
+
+#using infra-red in the blue component
+im.plotRGB(stacksent, r = 3, g = 2, b = 4) #all the vegetation became blue; with this you can enhance the cities and they will be yellow
+
+#
+?pairs
+pairs(stacksent)
+#for the infra-red the correlation is lower than the others bands
