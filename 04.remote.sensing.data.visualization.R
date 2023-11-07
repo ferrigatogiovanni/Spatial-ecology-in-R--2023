@@ -89,3 +89,12 @@ im.plotRGB(stacksent, r = 3, g = 2, b = 4) #all the vegetation became blue; with
 ?pairs
 pairs(stacksent)
 #for the infra-red the correlation is lower than the others bands
+#the histogram shows the reflectance values of each band
+
+#NIR is highly reflected by a tree (pixel with high reflactance), while RED is quite absorbed so the reflectance will not be high (pixel with low reflactance)
+#we can compute the difference between the the values of reflactance (NIR reflactance - RED reflactance = 80 - 30)
+#if the tree is suffering the value of NIR reflactance will be lower and the RED reflactance will be higher than before since the red is not absorbed
+#in this case the difference changes -> NIR reflactance - RED reflactance = 50 - 80
+#healthy and suffering trees reflect and absorb light differently -> we can dectect healthy from suffering forests
+
+
