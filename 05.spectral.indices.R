@@ -31,3 +31,19 @@ plot(m1992[[1]]) #plotting the first band (which is NIR) -> the range on the rig
 #binary code -> 0 or 1 (1 bit = 2 informations; 2 bit = 4 informations; 4 bit = 1 informations)
 #most images are stored in 8 bits (8^2 = 256 informations)
 #computing reflectance using bits
+#NIR is highly reflected by a tree (pixel with high reflactance), while RED is quite absorbed so the reflectance will not be high (pixel with low reflactance)
+#we can compute the difference between the the values of reflactance (NIR reflactance - RED reflactance = 80 - 30 = DVI)
+#if the tree is suffering the value of NIR reflactance will be lower and the RED reflactance will be higher than before since the red is not absorbed
+#in this case the difference changes -> NIR reflactance - RED reflactance = 50 - 80 = DVI
+#healthy and suffering trees reflect and absorb light differently -> we can dectect healthy from suffering forests
+
+#DVI = NIR - RED
+#(bands: 1 = NIR, 2 = RED , 3 = GREEN)
+#calculating DVI of 1992
+dvi1992 = m1992[[1]]-m1992[[2]]
+plot(dvi1992) #the values under 0 (on the right) are barren soils or suffering plants
+c1 <- colorRampPalette(c("dark blue", "yellow", "red", "black"))(100)
+plot(dvi1992, col = c1) #the darkest colour represent the healtier part of the forest
+#calculating DVI of 2006
+dvi2006 = m2006[[1]]-m2006[[2]]
+plot(dvi1992, col = c1) #the healtier vegetation is not high as before
