@@ -10,7 +10,7 @@ im.list()
 #importing the file (matogrosso) 
 m1992 <- im.import("matogrosso_l5_1992219_lrg.jpg") #earth resolution at 30 m
 m2006 <- im.import("matogrosso_ast_2006209_lrg.jpg") 
-#we know that bands are: 1 = NIR, 2 = RED , 3 = GREEN
+#we know that bands are: 1 = NIR, 2 = RED , 3 = GREEN this are the common bands or, otherwise, is noted in the meta-data
 
 #plotting with RGB
 im.plotRGB(m1992, r = 1, g = 2, b = 3)
