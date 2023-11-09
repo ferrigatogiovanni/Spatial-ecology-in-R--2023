@@ -37,13 +37,32 @@ plot(m1992[[1]]) #plotting the first band (which is NIR) -> the range on the rig
 #in this case the difference changes -> NIR reflactance - RED reflactance = 50 - 80 = DVI
 #healthy and suffering trees reflect and absorb light differently -> we can dectect healthy from suffering forests
 
-#DVI = NIR - RED
+#Difference vegetation index (DVI)-> DVI = NIR - RED; DVI is always ranging from -255 to 256 
 #(bands: 1 = NIR, 2 = RED , 3 = GREEN)
 #calculating DVI of 1992
 dvi1992 = m1992[[1]]-m1992[[2]]
-plot(dvi1992) #the values under 0 (on the right) are barren soils or suffering plants
+plot(dvi1992) #the values under 0 (on the right) are barren soils or suffering plants (negative reflectace)
 c1 <- colorRampPalette(c("dark blue", "yellow", "red", "black"))(100)
-plot(dvi1992, col = c1) #the darkest colour represent the healtier part of the forest
+plot(dvi1992, col = c1) #the darkest colour represent the healthier part of the forest
 #calculating DVI of 2006
 dvi2006 = m2006[[1]]-m2006[[2]]
-plot(dvi1992, col = c1) #the healtier vegetation is not high as before
+plot(dvi2006, col = c1) #the healthier vegetation is not high and expanded as before
+
+#Normalized difference vegetation index(NDVI) -> NDVI is always ranging from -1 to 1 
+#calculating NDVI of 1992
+ndvi1992 = (m1992[[1]] - m1992[[2]]) / (m1992[[1]] + m1992[[2]])
+#or
+ndvi1992 = dvi1992 / (m1992[[1]] + m1992[[2]])
+plot(ndvi1992, col = c1) #you can see the range on the right (-1 -> 1)
+#calculating NDVI of 2006
+ndvi2006 = dvi2006 / (m2006[[1]] + m2006[[2]])
+plot(ndvi2006, col = c1)
+
+#plotting ndvi1992 and ndvi2006 toghether
+par(mfrow = c(1,2))
+plot(ndvi1992, col = c1)
+plot(ndvi2006, col = c1)
+
+#speeding up calculations
+ndvi2006a <- im.ndvi(m2006, 1, 2) #ypu can use the function im.ndvi instead of writing calculations
+plot(ndvi2006a, col = cl)
