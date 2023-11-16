@@ -34,6 +34,7 @@ g2015 <- im.import("greenland.2015.tif")
 
 plot(g2015, col=clg)
 
+#observing the changes from 2000 to 2015
 par(mfrow=c(1,2))
 plot(g2000, col=clg)
 plot(g2015, col=clg)
