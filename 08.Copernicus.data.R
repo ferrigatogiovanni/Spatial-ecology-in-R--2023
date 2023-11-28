@@ -28,3 +28,5 @@ plot(soilmcrop, col = cl)
 #another example
 ext <- c(-180, 180, -90, 90) #(minimum longitude, maximum longitude, minimum latitude, maximum latitude)
 extension <- crop(s, ext)
+
+##### CROP FUNCTION -> IMPORTANT FOR THE EXAM IF YOU WANT TO FOCUS YOUR ANALYSIS ON A SPECIFIC AREA OF THE GRAPHIC (example -> specific lake in Africa)
