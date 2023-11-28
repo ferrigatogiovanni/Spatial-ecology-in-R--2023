@@ -20,7 +20,7 @@ plot(soilm[[1]], col = cl)
 #cropping the graphic usig the function crop
 #setting the limits of the cropping
 ext <- c(22, 26, 55, 57) #(minimum longitude, maximum longitude, minimum latitude, maximum latitude)
-#cropping the graphic with ext limits and creating a new variable called soilmcrop
+#cropping the graphic with "ext" limits and putting the new graphic into a new variable called "soilmcrop"
 soilmcrop <- crop(soilm[[1]], ext)
 #plotting the cropped graphic
 plot(soilmcrop, col = cl)
