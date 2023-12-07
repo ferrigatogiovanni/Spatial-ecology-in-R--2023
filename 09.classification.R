@@ -15,7 +15,7 @@ sun <- im.import("Solar_Orbiter_s_first_views_of_the_Sun_pillars.jpg") #(yellow 
 sunc <- im.classify(sun, num_clusters = 3) 
 
 plot(sunc)
-#how can I know which class has the highest energy?
+#how can I know which class has the highest energy in sunc?
 plot(sun) #(yellow corresponds to higher energy and black corresponds to low energy)
 plot(sunc)
 #just plot the two and see where the colours overlaps; in my case class 2 (yellow) corresponds to the higher energy and class 3 (green) correrponds to the lower energy 
