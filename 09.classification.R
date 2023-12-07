@@ -64,8 +64,8 @@ y1992 <- c(83, 17)
 y2006 <- c(45, 55)
 
 tabout <- data.frame(class, y1992, y2006)
-#final output
-p1 <- ggplot(tabout, aes(x=cover, y=perc1992, color=cover) + geom_bar(stat="identity", fill="white"))
+#final output 
+p1 <- ggplot(tabout, aes(x=cover, y=perc1992, color=cover) + geom_bar(stat="identity", fill="white")) #in order to use ggplot you need library(ggplot2)
 p1
 p2 <- ggplot(tabout, aes(x=cover, y=perc2006, color=cover) + geom_bar(stat="identity", fill="white"))
 p2
