@@ -6,6 +6,7 @@
 library(terra)
 library(imageRy)
 library(ggplot2)
+library(patchwork)
 
 im.list()
 
@@ -71,6 +72,7 @@ p1 <- ggplot(tabout, aes(x=class, y=y1992, color=class)) + geom_bar(stat="identi
 p1
 p2 <- ggplot(tabout, aes(x=class, y=y2006, color=class)) + geom_bar(stat="identity", fill="white") #expressing 2006 data in a barplot
 p2
+#in order to add them you need library(patchwork)
 p1 + p2 #adding the two barplots
 
 # final output, rescaled
