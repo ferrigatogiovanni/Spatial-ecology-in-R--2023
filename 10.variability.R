@@ -18,7 +18,8 @@ plot(nir)
 
 # moving window
 #focal() -> https://www.rdocumentation.org/packages/raster/versions/3.6-26/topics/focal
-sd3 <- focal(nir, matrix(1/9, 3, 3), fun = sd) #matrix has 9 pixels, and we are gonna use just one (1/9); the function (fun) is standard deviation
+#calculating the sd (standard deviation)
+sd3 <- focal(nir, matrix(1/9, 3, 3), fun = sd) #matrix has 9 pixels (1/9); the function (fun) is standard deviation
 plot(sd3) #plotting the standard deviation of the picture
 
 viridisc <- colorRampPalette(viridis(7))(255) #using the 7th color of viridis -> viridis(7)
