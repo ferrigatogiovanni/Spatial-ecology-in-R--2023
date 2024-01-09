@@ -1,3 +1,5 @@
+# PCA -> principal components analysis
+
 library(imageRY)
 library(terra)
 library(viridis)
