@@ -14,8 +14,8 @@
 # 07 External data
 # 08 Copernicus data
 # 09 Classification
-# 10
-# 11
+# 10 Variability
+# 11 Principal Component Analysis
 
 #----------------------------
 
@@ -692,4 +692,99 @@ p1 + p2
 
 #----------------------------
 
-# 10 
+# 10 Variability
+
+# measurement of RS based variability
+
+library(terra)
+library(imageRy)
+library(viridis)
+
+im.list() #list of files
+sent <- im.import("sentinel.png") #sentinel_4 is a control band
+
+#band 1 = NIR
+#band 2 = red
+#band 3 = green
+im.plotRGB(sent, r=1, g=2, b=3)
+im.plotRGB(sent, r=2, g=1, b=3) #vegetation in green and soil in purple
+
+nir <- sent[[1]]
+plot(nir)
+
+# moving window
+#focal() -> https://www.rdocumentation.org/packages/raster/versions/3.6-26/topics/focal
+#calculating the sd (standard deviation)
+sd3 <- focal(nir, matrix(1/9, 3, 3), fun = sd) #matrix has 9 pixels (3x3); the function (fun) is standard deviation
+plot(sd3) #plotting the standard deviation of the picture
+
+viridisc <- colorRampPalette(viridis(7))(255) #using the 7th color of viridis -> viridis(7); 255 index color; north-west part 
+#has the most variability
+plot(sd3, col=viridisc)
+
+#Exercise: calculate variability in a 7x7 pixels moving window 
+sd7 <- focal(nir, matrix(1/49, 7, 7), fun = sd) 
+plot(sd7, col=viridisc) 
+
+#Exercise: plot via par(mfrow() the 3x3 and the 7x7 standard deviation
+par(mfrow = c(1,2))
+plot(sd3, col=viridisc)
+plot(sd7, col=viridisc)
+#in the 3x3 we have a very local calculation while in the 7x7 moving window (bigger moving window) we will include more pixels so
+#there'll be a higher variability
+
+#Plot the original image with the 7x7
+par(mfrow = c(1,2))
+im.plotRGB(sent, r=2, g=1, b=3)
+plot(sd7, col=viridisc)
+#upper-left -> we can see the similarity (higher variability) in common
+
+#----------------------------
+
+# 11 Principal Component Analysis
+
+# PCA -> Principal Component Analysis
+
+library(imageRY)
+library(terra)
+library(viridis)
+
+im.list()
+
+sent <- im.import("sentinel.png")
+
+pairs(sent) #3rd row, 2nd column -> high correlation
+
+#perform PCA on sent
+sentpc <- im.pca2(sent)
+sentpc
+
+pc1 <-sentpc$PC1 #selecting just the first image
+viridisc <- colorRampPalette(viridis(7))(255)
+plot(pc1, col=viridisc)
+
+#Calculating standard deviation ontop of pc1
+pc1sd3 <- focal(pc1, matrix(1/9, 3, 3), fun=sd)
+plot(pc1sd3, col=viridisc)
+
+pc1sd7 <- focal(pc1, matrix(1/49, 7, 7), fun=sd)
+plot(pc1sd7, col=viridisc)
+
+#plotting everything alltoghether
+par(mfrow = c(2,3))
+im.plotRGB(sent, 2, 1, 3)
+#sd from the variability script
+plot(sd3, col=viridisc)
+plot(sd7, col=viridisc)
+plot(pc1, col=viridisc)
+plot(pc1sd3, col=viridisc)
+plot(pc1sd7, col=viridisc)
+
+#stacking all the standard deviation layers (sd3, sd7, pc1sd3 and pc1sd7)
+sdstack <- c(sd3, sd7, pc1sd3, pc1sd7)
+names(sdstack) <- c("sd3", "sd7", "pc1sd3", "pc1sd7")
+plot(sdstack, col=viridisc)
+#sd is representing the amount of variability of a moving window (7x7 is more blurry because the variability in each pixel is 
+#higher)
+
+#----------------------------
