@@ -2,8 +2,6 @@
 
 library(terra)
 library(imageRy)
-library()
-library()
 
 im.list()
 #NASA Earth observatory -> you can search the file "matogrosso_ast_2006209_lrg.jpg" on thw website
