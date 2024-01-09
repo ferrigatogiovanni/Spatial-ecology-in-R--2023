@@ -1,5 +1,6 @@
 #remote sensing for ecosystem monitoring
 #(remote sensing in ecology and conservation -> see website)
+# RS data
 
 library(devtools) #you need it in order to use install_github
 library(terra)
