@@ -1,4 +1,5 @@
 # simulating colour blind vision 
+# see Ranieri paper on vision/colour blindness
 
 library(devtools)
 library(colorblindr)
