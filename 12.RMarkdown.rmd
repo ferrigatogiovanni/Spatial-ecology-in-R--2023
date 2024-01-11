@@ -62,9 +62,9 @@ im.plotRGB(mato1992, r=1, g=3, b=2)
 
 Calculating spectral indices:
 ```{r, eval = T}
+library(terra)
 library(viridis)
 dvi <- mato1992[[1]] - mato1992[[2]]
 viridisc <- colorRampPalette(viridis(7))(225)
-#im.plotRGB(dvi, col=viridisc)
-
+plot(dvi, col=viridisc)
 ```
