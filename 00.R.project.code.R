@@ -190,7 +190,7 @@ class_sk <- c("Forest", "No Forest", "Data not available (Clouds)")
 percentages_2018 <- c(73.6, 26.4, 0)
 percentages_2023 <- c(74.1, 21.2, 4.7)
 
-##putting all together in a data frame
+##assign them in the same data frame
 chg_sk <- data.frame(class_sk, percentages_2018, percentages_2023)
 chg_sk
 
