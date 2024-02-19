@@ -1,6 +1,6 @@
 ####Analysis of the vegetation state in South Kalimantan (Borneo)
 ##this project focused on the South Kalimantan region in Borneo and the aim consisted in a multitemporal analysis of the
-##vegetation state based on the changes over time of the following indexes: FCover and NDVI.
+##vegetation state based on the changes over time of the following parameters: FCover and NDVI.
 
 ##first of all I must recall all the packages that I need for the analysis
 library(ncdf4)     #to correctly import .nc files
