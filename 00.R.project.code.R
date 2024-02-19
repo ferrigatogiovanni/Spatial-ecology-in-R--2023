@@ -5,7 +5,6 @@
 ##first of all I must recall all the packages that I need for the analysis
 library(ncdf4)     #to correctly import .nc files
 library(terra)     #to use the crop and rast functions
-library(raster)    #to work with raster files
 library(viridis)   #inclusive color palette for color blind people
 library(imageRy)   #to analyze images (im.classify())
 library(ggplot2)   #to create appropriate graphs through the ggplot function
