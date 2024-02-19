@@ -499,6 +499,9 @@ dif = EN01[[1]] - EN13[[1]] #[[1]] -> selecting the first element
 # palette
 cldif <- colorRampPalette(c("blue", "white", "red")) (100)
 plot(dif, col=cldif)
+# red is higher in march, yellow is higher in january
+# so we have a huge decrease in march (there's more yellow than red)
+# we see that in many cities people stopped to use cars
 
 ########
 ### New example: temperature in Greenland
@@ -522,6 +525,8 @@ plot(g2015, col=clg)
 # stacking the data
 stackg <- c(g2000, g2005, g2010, g2015)
 plot(stackg, col=clg)
+# we see that the surface temperature in Greenland have increased and then decreased back, while that in the Nunavut has gradually increased
+# also Island's temperature has decreased a little bit
 
 # Exercise: make the differencxe between the first and the final elemnts of the stack
 difg <- stackg[[1]] - stackg[[4]]
@@ -616,6 +621,8 @@ extension <- crop(s, ext)
 
 # 09 Classification
 
+# Estimate the qualitative and quantitative difference between two images taken at different times
+# We need to transform images in classes (land cover, land use, etc.)
 #each pixel have its own level of reflectance
 #you can calculate the distances between the reflectances and assign a class (e.g. water,urban area, mountain) to each pixel based on the reflactance 
 
@@ -677,8 +684,8 @@ tot2006
 p2006 <- f2006 * 100 / tot2006
 p2006 #forest: 45%; human: 55%
 
-# building the final table
-class <- c("forest", "human")
+# Building the final table, which means a graph with all this data -> function: data
+# We need to build the columns class <- c("forest", "human")
 y1992 <- c(83, 17)
 y2006 <- c(45, 55)
 
@@ -703,6 +710,8 @@ p1 + p2
 # 10 Variability
 
 # measurement of RS based variability
+# there are different indices in statistics: the most simple thing in our case was to measure the standard deviation, that is how much the different data are divergin from the mean
+# we measured it with the focal() function
 
 library(terra)
 library(imageRy)
@@ -720,8 +729,12 @@ im.plotRGB(sent, r=2, g=1, b=3) #vegetation in green and soil in purple
 nir <- sent[[1]]
 plot(nir)
 
-# moving window
+# moving window approach for divesity assessment
+# we are going to calculate the standard deviation (sd) of windows of pixels, one at the time
+# in the end we would have passed the window in the whole image, calculating each time the sd 
+# value of the central pixel of the window
 #focal() -> https://www.rdocumentation.org/packages/raster/versions/3.6-26/topics/focal
+
 #calculating the sd (standard deviation)
 sd3 <- focal(nir, matrix(1/9, 3, 3), fun = sd) #matrix has 9 pixels (3x3); the function (fun) is standard deviation
 plot(sd3) #plotting the standard deviation of the picture
@@ -763,24 +776,32 @@ sent <- im.import("sentinel.png")
 
 pairs(sent) #3rd row, 2nd column -> high correlation
 
+# MULTIVARIATE ANALYSIS
+# Measurement of R based variability with a single layer, which is chosen objectively with Multivariate Analysis
+# compact the 3 bands of sentinel into one to better visualize it
+
 #perform PCA on sent
 sentpc <- im.pca2(sent)
 sentpc
+
+# it says that the principal component will show the 71% of the variability, the second 53% and so on
 
 pc1 <-sentpc$PC1 #selecting just the first image
 viridisc <- colorRampPalette(viridis(7))(255)
 plot(pc1, col=viridisc)
 
-#Calculating standard deviation ontop of pc1
+#Calculating standard deviation ontop of pc1 in a 3x3 matrix
 pc1sd3 <- focal(pc1, matrix(1/9, 3, 3), fun=sd)
 plot(pc1sd3, col=viridisc)
 
+#Calculating standard deviation ontop of pc1 in a 3x3 matrix
 pc1sd7 <- focal(pc1, matrix(1/49, 7, 7), fun=sd)
 plot(pc1sd7, col=viridisc)
 
 #plotting everything alltoghether
 par(mfrow = c(2,3))
 im.plotRGB(sent, 2, 1, 3)
+
 #sd from the variability script
 plot(sd3, col=viridisc)
 plot(sd7, col=viridisc)
