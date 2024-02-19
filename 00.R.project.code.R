@@ -1,4 +1,5 @@
-####Analysis of the vegetation state in South Kalimantan (Borneo)
+####Multitemporal analysis of the vegetation state in South Kalimantan (Borneo)
+
 ##this project focused on the South Kalimantan region in Borneo and the aim consisted in a multitemporal analysis of the
 ##vegetation state based on the changes over time of the following parameters: FCover and NDVI.
 
@@ -51,19 +52,18 @@ fcover2007_crop <- crop(fcover2007[[1]], ext)
 fcover2014_crop <- crop(fcover2014[[1]], ext)
 fcover2020_crop <- crop(fcover2020[[1]], ext)
 
-##to better visualize and manipulate the data I'm gonna stack the images just cropped 
+##to better visualize and manipulate the data I'm gonna stack the images that I just cropped 
 fcover_stack <- c(fcover1999_crop, fcover2007_crop, fcover2014_crop, fcover2020_crop)
 
 ##visualizing the images 
-plot(fcover_stack,main = c("FCover in 1999", "FCover in 2007", "FCover in 2014",
-                           "FCover in 2020"), col = cl)
+plot(fcover_stack,main = c("FCover in 1999", "FCover in 2007", "FCover in 2014", "FCover in 2020"), col = cl)
 dev.off()
 
 ##now I want to observe the difference of FCOVER between the periods considered
-diff_fcov99_07 <- fcover_stack[[1]] - fcover_stack[[2]]
-diff_fcov07_14 <- fcover_stack[[2]] - fcover_stack[[3]]
-diff_fcov14_20 <- fcover_stack[[3]] - fcover_stack[[4]]
-diff_fcov99_20 <- fcover_stack[[1]] - fcover_stack[[4]]
+diff_fcov99_07 <- fcover_stack[[1]] - fcover_stack[[2]] #difference between 1999 and 2007
+diff_fcov07_14 <- fcover_stack[[2]] - fcover_stack[[3]] #difference between 2007 and 2014
+diff_fcov14_20 <- fcover_stack[[3]] - fcover_stack[[4]] #difference between 2014 and 2020
+diff_fcov99_20 <- fcover_stack[[1]] - fcover_stack[[4]] #difference between 1999 and 2020
 
 ##plotting the differences 
 par(mfrow = c(2,2))
@@ -73,9 +73,9 @@ plot(diff_fcov14_20, main = "Changes between 2014 and 2020", col = cl)
 plot(diff_fcov99_20, main = "Changes between 1999 and 2020", col = cl)
 dev.off()
 
-##since I want to highlight better the difference I'm gonna classify the graphic of the changes between 1999 and 2007, 
+##since I want to highlight even better the difference I'm gonna classify the changes between 1999 and 2020, 
 ##which is the whole period considered in this analysis
-##the classification is going to be in three different categories/classes:
+##the classification is going to be in three different classes:
 ##increase in fcover, no change in fcover, decrease in fcover
 ##observe the change in pixels
 diff_fcov99_20c <- im.classify(diff_fcov99_20, num_clusters = 3, colors = c("white", "yellow2", "chartreuse3"))
@@ -87,12 +87,11 @@ dev.off()
 ##calculating the total number of pixels in the image
 total_pixel <- ncell(diff_fcov99_20c)
 
-#computing the percentage of each class (frequency of each class * 100)
+##computing the percentage of each class (frequency of each class * 100)
 (freq(diff_fcov99_20c)/total_pixel)*100
 
-##the results are:
-##(freq(diff_fcov99_20c)/total_pixel)*100
-##layer       value     count
+##the results of (freq(diff_fcov99_20c)/total_pixel)*100 are:
+##layer         value       count
 ##1 0.001014199 0.001014199  8.942191
 ##2 0.001014199 0.002028398 78.008114
 ##3 0.001014199 0.003042596 13.049696
