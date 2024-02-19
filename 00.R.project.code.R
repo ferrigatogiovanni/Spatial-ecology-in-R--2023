@@ -1,11 +1,13 @@
 ####Analysis of the vegetation state in South Kalimantan (Borneo)
+##this project focused on the South Kalimantan region in Borneo and the aim consisted in a multitemporal analysis of the
+##vegetation state based on the changes over time of the following indexes: FCover and NDVI.
 
 ##first of all I must recall all the packages that I need for the analysis
-library(ncdf4)     #to use the rast function and correctly import .nc files
+library(ncdf4)     #to correctly import .nc files
 library(terra)     #to use the crop and rast functions
 library(raster)    #to work with raster files
 library(viridis)   #inclusive color palette for color blind people
-library(imageRy)   #to manipulate and analyze images
+library(imageRy)   #to analyze images (im.classify())
 library(ggplot2)   #to create appropriate graphs through the ggplot function
 library(patchwork) #to add different bar plots together
 
