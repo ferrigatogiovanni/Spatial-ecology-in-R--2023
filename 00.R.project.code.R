@@ -108,12 +108,14 @@ p99_20 <- ggplot(results, aes(x = classes_fc, y = freq_chg_99_20)) +
           geom_bar(stat = "identity", fill = c("white", "yellow2", "chartreuse3")) +
           geom_text(aes(label = freq_chg_99_20), size = 5, hjust = 0.5, vjust = 0, 
           position = "stack") + ylim(c(0,100))
+
+##final ggplot
 p99_20
 dev.off()
 
 ####computing the NDVI
 
-##now I want to focus on a determined area within the region and observe the 
+##now I want to focus on the Banjarmasin area, within the region, and observe the 
 ##differences from 2018 to 2023
 
 ##first I must import the images that I downloaded from Sentinel-2; these images are in 
@@ -121,25 +123,27 @@ dev.off()
 SK2018 <- rast("2018-09-23-00_00_2018-09-23-23_59_Sentinel-2_L2A_False_color.jpg")
 SK2023 <- rast("2023-09-27-00_00_2023-09-27-23_59_Sentinel-2_L2A_False_color.jpg")
 
-##first look at the images
+##first look at the images by plotting them with the function plotRGB() 
 par(mfrow = c(2,1))
-plotRGB(SK2018,1,2,3)
-plotRGB(SK2023,1,2,3)
+plotRGB(SK2018,r = 1, g = 2,b = 3)
+plotRGB(SK2023,r = 1, g = 2,b = 3)
 dev.off()
 
 ##calculating the DVI (Difference Vegetation Index)
 ##DVI = NIR - RED
-##I know that bands: 1 = NIR, 2 = RED, 3 = GREEN
+##I know that bands are: 1 = NIR, 2 = RED, 3 = GREEN
 dvi2018 <- SK2018[[1]]-SK2018[[2]]
 plot(dvi2018, col = cl, main = "DVI 2018")
 dvi2023 <- SK2023[[1]]-SK2023[[2]]
 plot(dvi2023, col = cl, main = "DVI 2023")
+dev.off()
 
 ##calculating the NDVI (Normalized Difference Vegetation Index)
 ndvi2018 <- dvi2018/(SK2018[[1]]+SK2018[[2]]) #or ndvi2018 <- im.ndvi(SK2018, 1, 2)
 plot(ndvi2018, col = cl, main = "NDVI 2018")
 ndvi2023 <- dvi2023/(SK2023[[1]]+SK2023[[2]]) #or ndvi2023 <- im.ndvi(SK2023, 1, 2)
 plot(ndvi2023, col = cl, main = "NDVI 2023")
+dev.off()
 
 ##plotting ndvi2018 and ndvi2023 toghether
 par(mfrow = c(2,1))
@@ -168,10 +172,11 @@ dev.off()
 tot_pixel2018 <- ncell(SK2018c)
 tot_pixel2023 <- ncell(SK2023c)
 
-##finding the percentage
+##finding the percentage (frequency of each class * 100)
 (freq(SK2018c[[1]])/tot_pixel2018)*100
 (freq(SK2023c[[1]])/tot_pixel2023)*100
 
+##results:
 ##(freq(SK2018c[[1]])/tot_pixel2018)*100
 ##layer        value    count
 ##1 7.226739e-05 7.226739e-05 73.59834
@@ -205,18 +210,20 @@ g2023
 ##adding the two bar plots together
 g2018 + g2023
 
-##### In order to find more evidence in support of what I just found with NDVI 
-##and classification results, I'm gonna follow a moving window approach for a 
+## In order to find more evidence in support of what I just found with the NDVI 
+##and the classification results, I'm gonna perform a moving window approach for a 
 ##further diversity assessment by using the focal() function
 
-##calculating the sd in a 3x3 matrix with nir band SK2018[[1]] and SK2023[[1]]
+##calculating the sd in a 3x3 matrix with nir band SK2018[[1]] and SK2023[[1]]:
 ##standard deviation for 2018
-sd3_2018 <- focal(SK2018[[1]], matrix(1/9,3,3), fun = sd)
+sd3_2018 <- focal(SK2018[[1]], matrix(1/9, 3, 3), fun = sd)
+plot(sd3_2018)
 plot(sd3_2018, col = cl, main = "NIR band from 2018", cex.main = .8) 
 dev.off()
 
 #standard deviation for 2023
-sd3_2023 <- focal(SK2023[[1]], matrix(1/9,3,3), fun = sd)
+sd3_2023 <- focal(SK2023[[1]], matrix(1/9, 3, 3), fun = sd)
+plot(sd3_2023)
 plot(sd3_2023, col = cl, main = "NIR band from 2023", cex.main = .8) 
 dev.off()
 
@@ -232,4 +239,4 @@ plot(sd3_2018, col = cl, main = "NIR band from 2018", cex.main = .8)
 plot(sd3_2023, col = cl, main = "NIR band from 2023", cex.main = .8) 
 
 ##the study area remained quite unchanged over time (as I found with the NDVI and
-##classification analysis computed before)
+##the classification analysis done previously)
