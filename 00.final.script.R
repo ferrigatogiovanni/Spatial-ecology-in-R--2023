@@ -197,16 +197,16 @@ points(pres, cex = .5)
 # final multiframe 
 par(mfrow = c(2,2))
 
-plot(elevmap)
+plot(elevmap) #elevation
 points(pres, cex = .5)
 
-plot(tempmap)
+plot(tempmap) #temperature
 points(pres, cex = .5)
 
-plot(vegemap)
+plot(vegemap) #vegetation
 points(pres, cex = .5)
 
-plot(precmap)
+plot(precmap) #precipitation
 points(pres, cex = .5)
 
 #----------------------------
@@ -274,6 +274,7 @@ kerinci$timeRad <- kerinci$Time * 2 * pi #adding a new column with the time in r
 #
 tiger <- kerinci[kerinci$Sps == "tiger", ] #overwriting tiger 
 
+#plotting only timeRad of tiger
 plot(tiger$timeRad)
 
 timetig <- tiger$timeRad
@@ -350,18 +351,22 @@ plot(stacksent, col = cl)
 plot(stacksent[[4]], col = cl)
 
 #plot in a multiframe the bands with different color ramps
+#blue color ramp
 clblue <- colorRampPalette(c("dark blue","blue","light blue")) (100)
 plot(b2, col = clblue)
 
+#green color ramp
 clgreen <- colorRampPalette(c("dark green","green","light green")) (100)
 plot(b3, col = clgreen)
 
+#red color ramp
 clred <- colorRampPalette(c("dark red","red","pink")) (100)
 plot(b4, col = clred)
 
 clnir <- colorRampPalette(c("brown","orange","yellow")) (100)
 plot(b2, col = clnir)
 
+#plotting all together
 par(mfrow = c(2,2))
 plot(b2, col = clblue)
 plot(b3, col = clgreen)
@@ -540,7 +545,10 @@ library(terra)
 #setwd("C:\Users\ferri\Documenti") -> this won't work, you have to change the direction of the slash
 setwd("C:/Users/ferri/OneDrive/Documenti")
 
+#importing the data
 naja <- rast("najafiraq_etm_2003140_lrg")
+
+#plotting naja with plotRGB()
 plotRGB(naja, r = 1, g = 2, b = 3)
 
 #Exercise: Download the second image from the same site and import it in R
