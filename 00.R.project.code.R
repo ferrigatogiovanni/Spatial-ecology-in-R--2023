@@ -233,7 +233,7 @@ plot(sd3_2018, main = "NIR band from 2023", cex.main = .8)
 plot(sd3_2023, main = "NIR band from 2023", cex.main = .8) 
 dev.off()
 
-##plotting the results together (viridis colour)
+##plotting the results together (viridis color)
 par(mfrow=c(1,2))
 plot(sd3_2018, col = cl, main = "NIR band from 2018", cex.main = .8) 
 plot(sd3_2023, col = cl, main = "NIR band from 2023", cex.main = .8) 
