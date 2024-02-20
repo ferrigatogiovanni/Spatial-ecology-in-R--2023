@@ -1,0 +1,183 @@
+\documentclass{beamer}
+\usepackage{graphicx} % Required for inserting images
+\usepackage{listings}
+
+\usetheme{Frankfurt}
+\usecolortheme{crane}
+
+\logo{\includegraphics[width=1.5cm]{logo_UniBo.png}}
+\title{R project for Spatial Ecology in R}
+\subtitle{Multitemporal analysis of the vegetation state in South Kalimantan (Borneo)}
+\author{Giovanni Ferrigato}
+\institute{Alma Mater Studiorum Università di Bologna}
+\date{Academic year 2023-2024}
+
+\begin{document}
+
+\maketitle
+
+\AtBeginSection[] % Do nothing for \section*
+{
+\begin{frame}
+\frametitle{Outline}
+\tableofcontents[currentsection]
+\end{frame}
+}
+
+\section{Introduction}
+{
+\begin{frame}{Area of interest}
+This project focused on the \textbf{South Kalimantan} region in Borneo.
+\smallskip
+    \begin{columns}
+    \column{0.5\textwidth}
+        \centering
+        \includegraphics[width = 0.8\textwidth]{Borneo_map.png}
+    \column{0.5\textwidth}
+        \centering
+        \includegraphics[width = 0.9\textwidth]{SK.png}
+\end{columns}
+\end{frame}
+
+\begin{frame}{Aim of the project}
+The aim of this project consisted in a multitemporal analysis of the vegetation state based on the changes over time of the following parameters:
+\smallskip
+    \begin{itemize} 
+    \item \textbf{Fraction of Green Vegetation Cover} (FCover)\\
+    corresponds to the fraction of ground covered by green vegetation.
+    %it quantifies the spatial extent of the vegetation
+    \item \textbf{Normalized Difference Vegetation Index} (NDVI)\\
+    is an indicator of the greenness of the biomes.
+    \begin{equation}
+          NDVI=\frac{NIR-RED}{NIR+RED}
+          %REF_nir and REF_red are the spectral reflectances measured in the near infrared and red wavebands respectively
+    \end{equation}
+    where:\\
+    $NIR$ = reflectance in the near-infrared band\\
+    $R$ = reflectance in the red band.
+\end{itemize}
+\end{frame}
+}
+
+\section{Methods and Approaches}
+{
+\begin{frame}{Tools}
+    The \textbf{tools} used during this project were:
+    \smallskip
+    \begin{itemize}
+    \item R Studio
+    \item GitHub
+    \item Copernicus dataset
+    \item LaTeX Software
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Tools}
+while to perform the analysis in R Studio, the following \textbf{packages} were used:
+\smallskip
+\begin{itemize}
+\item \texttt{ncdf4}: to correctly import .nc files
+\item \texttt{terra}: to use the crop and rast functions
+\item \texttt{viridis}: inclusive color palette for color blind people
+\item \texttt{imageRy}: to analyze images (\texttt{im.classify()})
+\item \texttt{ggplot2}: to create appropriate graphs through the ggplot function
+\item \texttt{patchwork}: to add different bar plots together
+ \end{itemize}
+\end{frame}
+}
+
+\begin{frame}{Approach used - FCover change detection}
+     \textbf{FCover change} was detected through:
+     \smallskip
+    \begin{itemize}
+        \item Setting of the working directory in R with the \texttt{setwd()} function
+        \item Upload of the satellite images in R with the \texttt{rast()} function
+        \item Crop of the areas of interest with the \texttt{crop()} function
+        \item Calculation of the difference between each year
+        \item Identification and quantification of the classes with the
+        \texttt{im.classify()} function
+        \item Creation of a plot of the changes with the \texttt{ggplot()} function
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Approach used - Vegetation change}
+    Vegetation change was detected through:
+     \smallskip
+    \begin{itemize}
+        \item Import the false color images downloaded from Copernicus Browser
+        \item  \textbf{NDVI calculation}
+        \item Identification and quantification of the classes with the
+        \texttt{im.classify()} function
+        \item Creation of a plot of the changes with the \texttt{ggplot()} function
+        \item Moving window approach for Diversity Assessment with the \texttt{focal()}
+        function
+    \end{itemize}
+\end{frame}
+
+\section{Results}
+{
+\begin{frame}{FCover state over the years}
+    FCover of four different years:
+    \centering
+    \includegraphics[width = 0.8 \textwidth]{FCover.png}
+\end{frame}
+
+\begin{frame}{FCover changes over the years}
+    The changes of FCover between each year considered:
+    \centering
+    \includegraphics[width = 0.8 \textwidth]{FCover_changes.png}
+\end{frame}
+
+\begin{frame}{FCover - Classification of the changes between 1999 and 2020}
+    \centering
+    \includegraphics[width = 0.4 \textwidth]{class_changes.png}
+    \includegraphics[width = 0.5 \textwidth]{class_chg_plot.png}
+\end{frame}
+
+\begin{frame}{False color images}
+    For the computation of the NDVI, I downloaded the false colour images of the Banjarmasin area of September 2018 and 2023.
+    \smallskip
+    \centering
+    \includegraphics[width = 0.7 \textwidth]{False_colour.png}
+\end{frame}
+
+\begin{frame}{NDVI}
+    \centering
+    \includegraphics[width = 1 \textwidth]{NDVI.png}
+\end{frame}
+
+\begin{frame}{Classification over time}
+    \centering
+    \includegraphics[width = 1 \textwidth]{Class_2018_2023.png}
+\end{frame}
+
+\begin{frame}{Classification over time}
+    \centering
+    \includegraphics[width = 1 \textwidth]{class_ggplot.png}
+\end{frame}
+
+\begin{frame}{Diversity assessment}
+    Land variability was measured through a moving window approach that calculated the sd in a 3 x 3 matrix
+    \centering
+    \includegraphics[width = 0.8 \textwidth]{NIR.png}
+\end{frame}
+}
+
+\section{Conclusion}
+{
+\begin{frame}{Final comments}  
+    The principal conclusions of this work are:
+    \smallskip
+    \begin{itemize}
+        \item No major changes in FCover of the whole region from 1999 and 2020
+        \item No major changes in the green cover of the Banjarmasin area from 2018 and 2023? Result partially biased because of clouds presence?
+        \item Overall little changes detection 
+    \end{itemize}
+\end{frame} 
+}
+
+\begin{frame}{}
+    \centering
+    Thank you for the attention!
+\end{frame}
+\end{document}
